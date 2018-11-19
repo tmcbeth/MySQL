@@ -8,33 +8,33 @@ SELECT last_name from actor;
 
 -- 1b. Display the first and last name of each actor in a single column in upper case letters. Name the column Actor Name 
 
--- ALTER TABLE actor
--- ADD actor_name varchar (255) after last_update;
--- UPDATE actor SET actor_name = CONCAT(first_name,' ', last_name);
+ALTER TABLE actor
+ADD actor_name varchar (255) after last_update;
+UPDATE actor SET actor_name = CONCAT(first_name,' ', last_name);
 
 SELECT * FROM actor;
 
 -- 2a. You need to find the ID number, first name, and last name of an actor, of whom you know only the first name, "Joe." What is one query would you use to obtain this information?
 
--- CREATE VIEW joe as
--- SELECT actor_id, first_name, last_name from actor
--- WHERE first_name = "Joe";
+CREATE VIEW joe as
+SELECT actor_id, first_name, last_name from actor
+WHERE first_name = "Joe";
 
 SELECT * FROM joe;
 
 -- 2b. Find all actors whose last name contain the letters GEN :
 
--- CREATE VIEW gen as
--- SELECT actor_id, first_name, last_name from actor
--- WHERE last_name like "%gen%";
+CREATE VIEW gen as
+SELECT actor_id, first_name, last_name from actor
+WHERE last_name like "%gen%";
 
 SELECT * FROM gen;
 
 -- 2c. Find all actors whose last names contain the letters LI . This time, order the rows by last name and first name, in that order:
 
--- CREATE VIEW li as
--- SELECT actor_id, last_name, first_name from actor
--- WHERE last_name like "%li%";
+CREATE VIEW li as
+SELECT actor_id, last_name, first_name from actor
+WHERE last_name like "%li%";
 
 SELECT * FROM li;
 
@@ -44,11 +44,11 @@ SELECT country_id, country FROM country
 WHERE country 
 IN ('Afghanistan', 'Bangladesh', 'China');
 
--- ALTER TABLE actor
--- ADD description BLOB(255) after last_name;
+ALTER TABLE actor
+ADD description BLOB(255) after last_name;
 
--- ALTER TABLE actor
--- DROP COLUMN description;
+ALTER TABLE actor
+DROP COLUMN description;
 
 SELECT last_name, COUNT(*) AS "Count of Last Name"
 FROM actor
