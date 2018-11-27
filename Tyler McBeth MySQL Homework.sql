@@ -150,9 +150,12 @@ WHERE actor_id IN
         
 -- 7c. You want to run an email marketing campaign in Canada, for which you will need the names and email addresses of all Canadian customers. Use joins to retrieve this information
 
-SELECT customer.first_name, customer.last_name, customer.email, address.address, address.district, city.city, country.country
-FROM customer, address, city, country
-WHERE customer.address_id=address.address_id AND address.city_id = city.city_id AND city.country_id = country.country_id AND country.country="Canada";
+SELECT customer.first_name, customer.last_name, customer.email, country.country
+FROM customer
+INNER JOIN address ON customer.address_id = address.address_id
+INNER JOIN city ON address.city_id = city.city_id
+INNER JOIN country ON city.country_id = country.country_id
+WHERE country = "Canada";
 
 -- 7d.  Sales have been lagging among young families, and you wish to target all family movies for a promotion. Identify all movies categorized as family films.
 
