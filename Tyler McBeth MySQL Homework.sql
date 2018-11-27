@@ -16,7 +16,7 @@ SELECT * FROM actor;
 
 -- 2a. You need to find the ID number, first name, and last name of an actor, of whom you know only the first name, "Joe." What is one query would you use to obtain this information?
 
-CREATE VIEW joe as
+CREATE VIEW joe AS
 SELECT actor_id, first_name, last_name from actor
 WHERE first_name = "Joe";
 
@@ -24,7 +24,7 @@ SELECT * FROM joe;
 
 -- 2b. Find all actors whose last name contain the letters GEN :
 
-CREATE VIEW gen as
+CREATE VIEW gen AS
 SELECT actor_id, first_name, last_name from actor
 WHERE last_name like "%gen%";
 
@@ -32,9 +32,9 @@ SELECT * FROM gen;
 
 -- 2c. Find all actors whose last names contain the letters LI . This time, order the rows by last name and first name, in that order:
 
-CREATE VIEW li as
+CREATE VIEW li AS
 SELECT actor_id, last_name, first_name from actor
-WHERE last_name like "%li%";
+WHERE last_name LIKE "%li%";
 
 SELECT * FROM li;
 
@@ -44,15 +44,23 @@ SELECT country_id, country FROM country
 WHERE country 
 IN ('Afghanistan', 'Bangladesh', 'China');
 
+-- 3a. You want to keep a description of each actor. You don't think you will be performing queries on a description, so create a column in the table actor named description and use the data type BLOB (Make sure to research the type BLOB, as the difference between it and VARCHAR are significant).
+
 ALTER TABLE actor
-ADD description BLOB(255) after last_name;
+ADD description BLOB(255) AFTER last_name;
+
+-- 3b. Very quickly you realize that entering descriptions for each actor is too much effort. Delete the description column.
 
 ALTER TABLE actor
 DROP COLUMN description;
 
+-- 4a. List the last names of actors, as well as how many actors have that last name.
+
 SELECT last_name, COUNT(*) AS "Count of Last Name"
 FROM actor
 GROUP BY last_name;
+
+-- 4b. List last names of actors and the number of actors who have that last name, but only for names that are shared by at least two actors
 
 SELECT last_name, COUNT(*) AS "Count_of_Last_Name"
 FROM actor
