@@ -87,11 +87,11 @@ FROM staff JOIN address ON (staff.address_id = address.address_id);
 -- 6b. Use JOIN to display the total amount rung up by each staff member in August of 2005. Use tables staff and payment .
 
 CREATE TABLE total_amount_staff AS
-SELECT staff.first_name, staff.last_name, payment.amount
+SELECT staff.first_name, staff.last_name, payment.amount, payment.payment_date
 FROM staff JOIN payment ON (staff.staff_id = payment.staff_id);
 
 SELECT first_name, last_name, SUM(amount) as "Total Amount"
-FROM total_amount_staff
+FROM total_amount_staff WHERE payment_date LIKE "2005-08%"
 GROUP BY first_name, last_name;
 
 -- 6c. List each film and the number of actors who are listed for that film. Use tables film_actor and film . Use inner join.
